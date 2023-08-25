@@ -3,7 +3,7 @@ import './App.css';
 import logo from './logo.jpg'
 import {db} from './firebase';
 import React, { useState, useEffect, useRef } from 'react';
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs, runTransaction, doc } from "firebase/firestore";
 import mainImage from './75378.jpeg'
 
 function App() {
@@ -32,6 +32,21 @@ function App() {
       name: selectedPlayer,
       
     }
+    window.open('https://account.venmo.com/u/OWBPoast')
+    try{
+    await runTransaction(db, async (transaction) => {
+      console.log(selectedPlayer)
+      const sfDoc = await transaction.get(doc(db,"todos"));
+      if (!sfDoc.exists()) {
+        throw "Document does not exist!";
+      }
+      console.log(sfDoc.data())
+      // const newPopulation = sfDoc.data().population + 1;
+      // transaction.update(sfDocRef, { population: newPopulation });
+    });
+  } catch(e){
+    console.log(e)
+  }
 
     // try {
     //           const docRef = await addDoc(collection(db, "todos"), {
@@ -132,8 +147,8 @@ function App() {
 
           <nav id="navbar" className="navbar order-first order-lg-0">
             <ul>
-              <li><a className="active" href="index.html">Home</a></li>
-              <li><a href="about.html">About</a></li>
+              {/* <li><a className="active" href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li> */}
               {/* <li><a href="courses.html">Courses</a></li>
           <li><a href="trainers.html">Trainers</a></li>
           <li><a href="events.html">Events</a></li>
@@ -161,7 +176,7 @@ function App() {
             <i className="bi bi-list mobile-nav-toggle"></i>
           </nav>
 
-          <a href="courses.html" className="get-started-btn">Get Started</a>
+          {/* <a href="courses.html" className="get-started-btn">Get Started</a> */}
 
         </div>
       </header>
@@ -170,7 +185,7 @@ function App() {
         <div className="container position-relative" data-aos="zoom-in" data-aos-delay="100">
           <h1>Omaha Warriors<br />Baseball</h1>
           {/* <h2>We are team of talented designers making websites with Bootstrap</h2> */}
-          <a href="courses.html" className="btn-get-started">Get Started</a>
+          {/* <a href="courses.html" className="btn-get-started">Get Started</a> */}
         </div>
       </section>
       <section id="popular-courses" className="courses">
@@ -246,8 +261,8 @@ function App() {
                   </div>
                 </div>
 
-                <div className="input-group mt-3">
-                  <span className="input-group-text">$</span>
+                <div className="input-group mt-3 d-flex justify-content-center" style={{width:'300px', margin:'0 auto'}}>
+                  <span className="input-group-text">Amount to Pledge: $</span>
                   <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)"  onChange={updateData} />
                   <span className="input-group-text">.00</span>
                 </div>
