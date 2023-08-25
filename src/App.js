@@ -5,35 +5,35 @@ import React, { useState, useEffect } from 'react';
 import { collection, addDoc, getDocs } from "firebase/firestore";
 
 function App() {
-  const addTodo = async (e) => {
-    e.preventDefault();  
+//   const addTodo = async (e) => {
+//     e.preventDefault();  
    
-    try {
-        const docRef = await addDoc(collection(db, "todos"), {
-          todo: todo,    
-        });
-        console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
-        console.error("Error adding document: ", e);
-      }
-}
+//     try {
+//         const docRef = await addDoc(collection(db, "todos"), {
+//           todo: todo,    
+//         });
+//         console.log("Document written with ID: ", docRef.id);
+//       } catch (e) {
+//         console.error("Error adding document: ", e);
+//       }
+// }
 
-const fetchPost = async () => {
+// const fetchPost = async () => {
    
-    await getDocs(collection(db, "todos"))
-        .then((querySnapshot)=>{              
-            const newData = querySnapshot.docs
-                .map((doc) => ({...doc.data(), id:doc.id }));
-                console.log(newData)
-            setTodos(newData);                
-            console.log(todos, newData);
-        })
+//     await getDocs(collection(db, "todos"))
+//         .then((querySnapshot)=>{              
+//             const newData = querySnapshot.docs
+//                 .map((doc) => ({...doc.data(), id:doc.id }));
+//                 console.log(newData)
+//             setTodos(newData);                
+//             console.log(todos, newData);
+//         })
    
-}
+// }
 
-useEffect(()=>{
-    fetchPost();
-}, [fetchPost])
+// useEffect(()=>{
+//     fetchPost();
+// }, [fetchPost])
 
     const team = [
       {
