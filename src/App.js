@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import {db} from '../firebase';
+import {db} from './firebase';
 import React, { useState, useEffect } from 'react';
 import { collection, addDoc, getDocs } from "firebase/firestore";
 
