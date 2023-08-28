@@ -6,7 +6,7 @@ import { ROUTES } from './resources/routes-constants'
 
 const RoutesComponent = () => {
     return (
-        <Router>
+        <Router basename='/OmahaWarriors'>
             <Routes>
                 {/* <Route path={ROUTES.INTRO_ROUTE} element={<Intro />} /> */}
                 <Route path={ROUTES.MAINPAGE_ROUTE} element={<Home />} />
