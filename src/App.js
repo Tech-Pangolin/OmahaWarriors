@@ -15,7 +15,7 @@ function App() {
         <div className="container d-flex align-items-center">
 
           {/* <h1 className="logo me-auto"><a href="index.html">Mentor</a></h1> */}
-          <Link to="/" className="logo me-auto"><img src={logo} alt="" className="img-fluid" /></Link>
+          <a href="https://tech-pangolin.github.io/OmahaWarriors/" className="logo me-auto"><img src={logo} alt="" className="img-fluid" /></a>
 
           <nav id="navbar" className="navbar order-first order-lg-0">
             <ul>
