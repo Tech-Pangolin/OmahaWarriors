@@ -4,7 +4,7 @@ import logo from './logo.jpg'
 import {db} from './firebase';
 import React, { useState, useEffect, useRef } from 'react';
 import { collection, addDoc, getDocs, runTransaction, doc,getDoc,setDoc } from "firebase/firestore";
-import mainImage from './75378.jpeg'
+import { Link } from 'react-router-dom';
 import RoutesComponent from './RoutesComponent'
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
         <div className="container d-flex align-items-center">
 
           {/* <h1 className="logo me-auto"><a href="index.html">Mentor</a></h1> */}
-          <a href="/" className="logo me-auto"><img src={logo} alt="" className="img-fluid" /></a>
+          <Link to="/" className="logo me-auto"><img src={logo} alt="" className="img-fluid" /></Link>
 
           <nav id="navbar" className="navbar order-first order-lg-0">
             <ul>

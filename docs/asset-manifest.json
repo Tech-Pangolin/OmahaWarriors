@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/OmahaWarriors/static/css/main.073c9b0a.css",
-    "main.js": "/OmahaWarriors/static/js/main.26db013c.js",
+    "main.js": "/OmahaWarriors/static/js/main.81afa869.js",
     "static/js/787.28cb0dcd.chunk.js": "/OmahaWarriors/static/js/787.28cb0dcd.chunk.js",
     "static/media/75378.jpeg": "/OmahaWarriors/static/media/75378.c1021cf8436ac4163f41.jpeg",
     "static/media/logo.jpg": "/OmahaWarriors/static/media/logo.3a51710b317726d7cade.jpg",
     "index.html": "/OmahaWarriors/index.html",
     "main.073c9b0a.css.map": "/OmahaWarriors/static/css/main.073c9b0a.css.map",
-    "main.26db013c.js.map": "/OmahaWarriors/static/js/main.26db013c.js.map",
+    "main.81afa869.js.map": "/OmahaWarriors/static/js/main.81afa869.js.map",
     "787.28cb0dcd.chunk.js.map": "/OmahaWarriors/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.26db013c.js"
+    "static/js/main.81afa869.js"
   ]
 }
