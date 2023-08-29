@@ -2,6 +2,7 @@
 import './App.css';
 import logo from './logo.jpg'
 import {db} from './firebase';
+
 import React, { useState, useEffect, useRef } from 'react';
 import { collection, addDoc, getDocs, runTransaction, doc,getDoc,setDoc } from "firebase/firestore";
 import { Link } from 'react-router-dom';
@@ -19,8 +20,8 @@ function App() {
 
           <nav id="navbar" className="navbar order-first order-lg-0">
             <ul>
-              {/* <li><a className="active" href="index.html">Home</a></li>
-              <li><a href="about.html">About</a></li> */}
+             <li><a className="active" href="https://tech-pangolin.github.io/OmahaWarriors/pledges">View Pledges</a></li>
+               {/* <li><a href="about.html">About</a></li> */}
               {/* <li><a href="courses.html">Courses</a></li>
           <li><a href="trainers.html">Trainers</a></li>
           <li><a href="events.html">Events</a></li>

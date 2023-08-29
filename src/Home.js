@@ -5,6 +5,7 @@ import { db } from './firebase';
 import React, { useState, useEffect, useRef } from 'react';
 import { collection, addDoc, getDocs, runTransaction, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { Link } from 'react-router-dom';
+import jackson from './players/jackson.jpg'
 import mainImage from './75378.jpeg'
 
 function Home() {
@@ -35,7 +36,9 @@ function Home() {
     },
     {
       name: 'Jackson Chidester',
-      number: 23
+      number: 23,
+      photo:jackson,
+      bio:`Baseball is life! A utility player who loves the infield, the pitcher's mound, and being behind the plate. Known for his speed and ability to steal bases. Loves all things sports including Husker football and the Buffalo Bills.`
     },
     {
       name: 'Michael Wittry',
@@ -68,6 +71,8 @@ function Home() {
         await setDoc(doc(db, "players", player.name), {
           name: player.name,
           number: player.number,
+          photo:player?.photo ?? logo,
+          bio: player?.bio ?? '',
           pledges: []
         });
       } catch (e) {
@@ -157,15 +162,16 @@ function Home() {
         <div className="container" data-aos="fade-up">
 
           <div className="section-title">
-            <h2>Players</h2>
+            <h2>Players</h2>   <button onClick={populatePlayers}>Populate Players</button>
             <p>Support our Team</p>
+            <h4>Please select the player you would like to support below:</h4>
           </div>
-          {/* <button onClick={populatePlayers}>Populate Players</button> */}
+       
           <div className="row d-flex justify-content-center" data-aos="zoom-in" data-aos-delay="100">
             {teamData?.map((player, i) =>
               <div key={i} className="col-lg-3 col-md-3 d-flex align-items-stretch justify-content-center mb-5">
                 <div className="course-item">
-                <Link to={`player/${player.number}`}><img src={mainImage} className="img-fluid" alt="..." /></Link>
+                <Link to={`player/${player.number}`}><img src={player?.photo ?? mainImage} className="img-fluid" alt="..." /></Link>
                   <div className="course-content">
                     <div className="d-flex justify-content-between align-items-center mb-3">
                       <h4>#{player.number}</h4>
