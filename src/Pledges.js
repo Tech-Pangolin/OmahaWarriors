@@ -21,6 +21,7 @@ console.log(showPledges)
             .then((response) => {
                console.log(response)
                 sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken)
+                setShowPledges(true)
             }).catch(err=>
                 alert('incorrect login'))
     }
