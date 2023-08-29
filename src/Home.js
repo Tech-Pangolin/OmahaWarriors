@@ -162,7 +162,12 @@ function Home() {
         <div className="container" data-aos="fade-up">
 
           <div className="section-title">
-            <h2>Players</h2>   <button onClick={populatePlayers}>Populate Players</button>
+            <h2>Players</h2>   
+            <div className='text-end'>
+            <Link to="/pledges" className="active">View Pledges (Admin)</Link>
+             {/* <button onClick={populatePlayers}>Populate Players</button> */}
+              </div>
+           
             <p>Support our Team</p>
             <h4>Please select the player you would like to support below:</h4>
           </div>

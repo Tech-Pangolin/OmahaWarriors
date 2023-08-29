@@ -20,7 +20,7 @@ function App() {
 
           <nav id="navbar" className="navbar order-first order-lg-0">
             <ul>
-             <li><a className="active" href="https://tech-pangolin.github.io/OmahaWarriors/pledges">View Pledges</a></li>
+             {/* <li><a className="active" href="https://tech-pangolin.github.io/OmahaWarriors/pledges">View Pledges</a></li> */}
                {/* <li><a href="about.html">About</a></li> */}
               {/* <li><a href="courses.html">Courses</a></li>
           <li><a href="trainers.html">Trainers</a></li>
