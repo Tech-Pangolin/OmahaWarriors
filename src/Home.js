@@ -209,7 +209,7 @@ function Home() {
             <h2>Players</h2>   
             <div className='text-end'>
             <Link to="/pledges" className="active">View Pledges (Admin)</Link>
-             <button onClick={populatePlayers}>Populate Players</button>
+             {/* <button onClick={populatePlayers}>Populate Players</button> */}
               </div>
            
             <p>Support our Team</p>
