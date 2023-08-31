@@ -76,6 +76,7 @@ function Player() {
         console.log(playerDataObj)
         data.pledgeType = pledgeType
         data.player = player.name
+        
         if (playerDataObj) {
           playerDataObj.pledges.push(data)
           await updateDoc(doc(db, "players", player.name), playerDataObj);
