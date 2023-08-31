@@ -76,7 +76,7 @@ function Player() {
         console.log(playerDataObj)
         data.pledgeType = pledgeType
         data.player = player.name
-        
+
         if (playerDataObj) {
           playerDataObj.pledges.push(data)
           await updateDoc(doc(db, "players", player.name), playerDataObj);
@@ -241,7 +241,7 @@ function Player() {
                 <div className="error-message"></div>
                 <div className="sent-message">Your message has been sent. Thank you!</div>
               </div>
-              <div className="text-center"><button type="submit">PLEDGE!</button></div>
+              <div className="text-center"><button type="submit" disabled={isSuccess}>{isSuccess ? 'Thank you for your pledge':'PLEDGE!'}</button></div>
             </form>
             {isSuccess && <div class="alert alert-success mt-5" role="alert">
               Pledge Successfully Submitted

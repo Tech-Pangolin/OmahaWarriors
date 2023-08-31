@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/OmahaWarriors/static/css/main.073c9b0a.css",
+    "main.js": "/OmahaWarriors/static/js/main.8b12c6f0.js",
+    "static/js/787.28cb0dcd.chunk.js": "/OmahaWarriors/static/js/787.28cb0dcd.chunk.js",
+    "static/media/easton.jpg": "/OmahaWarriors/static/media/easton.ed0c4f6970b1bab72250.jpg",
+    "static/media/michael.jpg": "/OmahaWarriors/static/media/michael.2091a4a611c62431df8a.jpg",
+    "static/media/jackson.jpg": "/OmahaWarriors/static/media/jackson.1ec6fd7b8f23896104b3.jpg",
+    "static/media/parker.jpg": "/OmahaWarriors/static/media/parker.47ed9250f7f0ae9febdd.jpg",
+    "static/media/emerson.jpg": "/OmahaWarriors/static/media/emerson.edefd3eadda818957585.jpg",
+    "static/media/mason.jpg": "/OmahaWarriors/static/media/mason.85c2a04c78a285c5ee73.jpg",
+    "static/media/vincent.jpg": "/OmahaWarriors/static/media/vincent.1c6c4cbd4353f37ea244.jpg",
+    "static/media/logo.jpg": "/OmahaWarriors/static/media/logo.52e64ed57d686f710279.jpg",
+    "static/media/jack.jpg": "/OmahaWarriors/static/media/jack.c226a265a343235a6a0d.jpg",
+    "static/media/75378.jpeg": "/OmahaWarriors/static/media/75378.c1021cf8436ac4163f41.jpeg",
+    "index.html": "/OmahaWarriors/index.html",
+    "main.073c9b0a.css.map": "/OmahaWarriors/static/css/main.073c9b0a.css.map",
+    "main.8b12c6f0.js.map": "/OmahaWarriors/static/js/main.8b12c6f0.js.map",
+    "787.28cb0dcd.chunk.js.map": "/OmahaWarriors/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.8b12c6f0.js"
+  ]
+}

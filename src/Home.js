@@ -1,27 +1,20 @@
 
 import './App.css';
-import logo from './logo.jpg'
+
 import { db } from './firebase';
 import React, { useState, useEffect, useRef } from 'react';
 import { collection, addDoc, getDocs, runTransaction, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { Link } from 'react-router-dom';
-import easton from './players/easton.jpg'
-import emerson from './players/emerson.jpg'
-import jack from './players/jack.jpg'
-import jackson from './players/jackson.jpg'
-import mason from './players/mason.jpg'
-import michael from './players/michael.jpg'
-import parker from './players/parker.jpg'
-import vincent from './players/vincent.jpg'
+
 import mainImage from './75378.jpeg'
 
 function Home() {
   const [data, setData] = useState({})
   const [teamData, setTeamData] = useState([])
-  const [pledgeType,setPledgeType]=useState(null)
-  const [isLoading, setIsLoading]= useState(false)
- 
- 
+  const [pledgeType, setPledgeType] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+
   const updateData = e => {
     setData({
       ...data,
@@ -29,7 +22,7 @@ function Home() {
     })
   }
 
-  const updateType = e =>{
+  const updateType = e => {
     setPledgeType(e.target.value)
   }
   const ref = useRef(null);
@@ -74,20 +67,20 @@ function Home() {
       if (playerDataObj) {
         playerDataObj.pledges.push(data)
         await updateDoc(doc(db, "players", selectedPlayer), playerDataObj);
-       // setIsLoading(false)
+        // setIsLoading(false)
       }
 
     } catch (e) {
       console.log(e)
     }
 
- 
+
   }
 
   //https://account.venmo.com/u/OWBPoast
 
 
- 
+
 
   return (
     <div>
@@ -101,35 +94,67 @@ function Home() {
       </section>
       <section id="popular-courses" className="courses">
         <div className="container" data-aos="fade-up">
+          <div className='row'>
+            <div className="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 content text-center mb-5">
+              <h3>We're holding a Hitathon to help raise money for our team.  This will help offset costs related to player and organizational fees, uniforms, and tournaments.  Every little bit helps!</h3>
+              <p class="fst-italic">
+                The Hitathon will be a fun way for the team to fundraise and show off their skills!
+                We will hold the event on Sunday, September 17th from 12pm to 5pm at the baseball field in Elmwood Park.  We will also have a picnic where plates of food can be purchased - those funds will also go to the team. Once all players have completed their hits, there will be a pickup baseball game. Please feel free to come out and join us!
 
+              </p>
+              <p class="fst-italic">
+                Each player will have 10 balls to hit like normal batting practice.  Their top two distances will be recorded and added together, along with how many total balls they hit of the 10 pitched to them.
+              </p>
+              <p class="fst-italic">
+                A pledge can be made in three different ways:
+
+              </p>
+              <div className='text-start ml-5 d-flex flex-column align-items-center'>
+              <ul style={{listStyle:'none', marginLeft:'10%'}}>
+                <li><i class="bi bi-check-circle"></i> per ball hit, for up to 10 hits.</li>
+                <li><i class="bi bi-check-circle"></i> per foot hit adding together their two longest distances hit.</li>
+                <li><i class="bi bi-check-circle"></i> a flat amount.</li>
+              </ul></div>
+              <p class="fst-italic">
+              Once the event is over, we'll send you an invoice for payment via your Venmo account, email, or text. 
+              </p>
+              <p class="fst-italic">
+              Please use the links below to make a pledge for your player of choice!
+              </p>
+              <p class="fst-italic">
+              Thank you for supporting our team!  We look forward to seeing you at the picnic or one of our baseball games in the spring!
+              </p>
+            </div>
+          </div>
           <div className="section-title">
-            <h2>Players</h2>   
+
+            <h2>Players</h2>
             <div className='text-end'>
-            <Link to="/pledges" className="active">View Pledges (Admin)</Link>
-             {/* <button onClick={populatePlayers}>Populate Players</button> */}
-              </div>
-           
+              <Link to="/pledges" className="active">View Pledges (Admin)</Link>
+              {/* <button onClick={populatePlayers}>Populate Players</button> */}
+            </div>
+
             <p>Support our Team</p>
             <h4>Please select the player you would like to support below:</h4>
           </div>
-       
+
           <div className="row d-flex justify-content-center" data-aos="zoom-in" data-aos-delay="100">
             {teamData?.map((player, i) =>
               <div key={i} className="col-lg-3 col-md-3 d-flex align-items-stretch justify-content-center mb-5">
                 <div className="course-item">
-                <Link to={`player/${player.number}`}><img src={player?.photo ?? mainImage} className="img-fluid" alt="..." /></Link>
+                  <Link to={`player/${player.number}`}><img src={player?.photo ?? mainImage} className="img-fluid" alt="..." /></Link>
                   <div className="course-content">
                     <div className="d-flex justify-content-between align-items-center mb-3">
                       <h4>#{player.number}</h4>
-                    
+
                     </div>
 
                     <h3> <Link to={`player/${player.number}`}>{player.name}</Link></h3>
-                    <p>Pledges by Foot:  {player?.pledges?.filter(pledge=>pledge.pledgeType==="/foot").length}</p> 
-                    <p>Pledges by Hit:  {player?.pledges?.filter(pledge=>pledge.pledgeType==="/hit").length}</p> 
-                    <p>Pledges by Amount:  {player?.pledges?.filter(pledge=>pledge.pledgeType===" ").length}</p> 
+                    <p>Pledges by Foot:  {player?.pledges?.filter(pledge => pledge.pledgeType === "/foot").length}</p>
+                    <p>Pledges by Hit:  {player?.pledges?.filter(pledge => pledge.pledgeType === "/hit").length}</p>
+                    <p>Pledges by Amount:  {player?.pledges?.filter(pledge => pledge.pledgeType === " ").length}</p>
                     <div className="trainer d-flex justify-content-center align-items-center">
-                    <Link to={`player/${player.number}`}><button type="button" className="btn btn-success">Pledge for {player.name}</button></Link>
+                      <Link to={`player/${player.number}`}><button type="button" className="btn btn-success">Pledge for {player.name}</button></Link>
                       {/* <div className="trainer-profile d-flex align-items-center">
                         <img src="assets/img/trainers/trainer-1.jpg" className="img-fluid" alt="" />
                         <span>Antonio</span>

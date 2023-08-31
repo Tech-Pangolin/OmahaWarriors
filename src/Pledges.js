@@ -119,7 +119,7 @@ console.log(showPledges)
             {
               name: 'Vincent C',
               number: 5, 
-              bio: `Hi my name Vincent and my favorite positions are shortstop, pitcher, second base, outfield, catcher and third base. I really like learning and playing baseball. I play soccer, bowling and like camping and hiking with my scout troop.`,
+              bio: `Hi my name is Vincent and my favorite positions are shortstop, pitcher, second base, outfield, catcher and third base. I really like learning and playing baseball. I play soccer, bowling and like camping and hiking with my scout troop.`,
               photo: vincent
             },
         
