@@ -111,8 +111,8 @@ function Home() {
               </p>
               <div className='text-start ml-5 d-flex flex-column align-items-center'>
               <ul style={{listStyle:'none', marginLeft:'10%'}}>
-                <li><i class="bi bi-check-circle"></i> per ball hit, for up to 10 hits.</li>
-                <li><i class="bi bi-check-circle"></i> per foot hit adding together their two longest distances hit.</li>
+                <li><i class="bi bi-check-circle"></i> per ball hit, for up to 10 hits. <span className="fst-italic">(example: you pledge $1 per ball hit and the player hits 7, you would pay $7)</span></li>
+                <li><i class="bi bi-check-circle"></i> per foot hit adding together their two longest distances hit. <span className="fst-italic">(example: you pledge $0.10 per foot and the player hits a total of 200 feet, you would pay $20)</span></li>
                 <li><i class="bi bi-check-circle"></i> a flat amount.</li>
               </ul></div>
               <p class="fst-italic">

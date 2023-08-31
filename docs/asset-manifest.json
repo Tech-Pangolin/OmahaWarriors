@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/OmahaWarriors/static/css/main.073c9b0a.css",
-    "main.js": "/OmahaWarriors/static/js/main.8b12c6f0.js",
+    "main.js": "/OmahaWarriors/static/js/main.cecbef6d.js",
     "static/js/787.28cb0dcd.chunk.js": "/OmahaWarriors/static/js/787.28cb0dcd.chunk.js",
     "static/media/easton.jpg": "/OmahaWarriors/static/media/easton.ed0c4f6970b1bab72250.jpg",
     "static/media/michael.jpg": "/OmahaWarriors/static/media/michael.2091a4a611c62431df8a.jpg",
@@ -15,11 +15,11 @@
     "static/media/75378.jpeg": "/OmahaWarriors/static/media/75378.c1021cf8436ac4163f41.jpeg",
     "index.html": "/OmahaWarriors/index.html",
     "main.073c9b0a.css.map": "/OmahaWarriors/static/css/main.073c9b0a.css.map",
-    "main.8b12c6f0.js.map": "/OmahaWarriors/static/js/main.8b12c6f0.js.map",
+    "main.cecbef6d.js.map": "/OmahaWarriors/static/js/main.cecbef6d.js.map",
     "787.28cb0dcd.chunk.js.map": "/OmahaWarriors/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.8b12c6f0.js"
+    "static/js/main.cecbef6d.js"
   ]
 }
