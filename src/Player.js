@@ -195,7 +195,7 @@ function Player() {
           <h2 className='text-center'>Pledge for {player?.name}</h2>
 
 
-          <div className="col-lg-6 mt-5 mt-lg-0">
+          <div className="col-lg-8 mt-5 mt-lg-0">
 
             <form onSubmit={submitPledge} role="form" className="php-email-form" >
               <div className="row">
@@ -204,6 +204,9 @@ function Player() {
                 </div>
                 <div className="col-md-6 form-group mt-3 mt-md-0">
                   <input type="text" className="form-control" name="venmo" id="venmo" title="Please enter your Venmo username" placeholder="Venmo Username" required onChange={updateData} />
+                  <div class="form-text" id="basic-addon4">* Leave this blank if you don't use venmo and we'll send an invoice.</div>
+
+                 
                 </div>
               </div>
               <div className="row">
