@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState  } from 'react';
 import { db } from './firebase';
-import { collection, addDoc, getDocs, runTransaction, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
+import { collection, getDocs, doc, setDoc  } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword,  } from 'firebase/auth'
+import { Link } from 'react-router-dom';
 import logo from './logo.jpg'
 import easton from './players/easton.jpg'
 import emerson from './players/emerson.jpg'
@@ -14,31 +14,25 @@ import parker from './players/parker.jpg'
 import vincent from './players/vincent.jpg'
 
 function Pledges() {
-    const { num } = useParams();
-    const [player, setPlayer] = useState('')
     const [data, setData] = useState({})
     const [pledgeType, setPledgeType] = useState(null)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [totalPledges, setTotalPledges] = useState([])
-    console.log('test',sessionStorage.getItem('Auth Token'))
     const [showPledges, setShowPledges] = useState(sessionStorage.getItem('Auth Token') ? true : false)
-console.log(showPledges)
     function signIn() {
         const authentication = getAuth();
         signInWithEmailAndPassword(authentication, email, password)
             .then((response) => {
-               console.log(response)
                 sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken)
                 setShowPledges(true)
             }).catch(err=>
                 alert('incorrect login'))
     }
-    function signOut() {
-       
+
+    function signOut() {       
                 sessionStorage.setItem('Auth Token',null)
-                setShowPledges(false)
-          
+                setShowPledges(false)          
     }
 
     const populatePlayers = async () => {
@@ -71,7 +65,10 @@ console.log(showPledges)
             {
               name: 'Jack P',
               number: 3, 
-              photo: jack
+              photo: jack,
+              bio: `Jack Peteler is in 7th grade at St. Robert Bellarmine Catholic School. Jack (or Jackie as his teammates call him) enjoys playing baseball and basketball, skiing, playing video games, hitting golf balls as far as possible, riding dirt bikes at his grandparents house, and hanging out with friends. He has two brothers and a sister. 
+              Jack has been playing baseball since kindergarten. His favorite position on the field is catcher. He's an Atlanta Braves fan, but really loves watching any team play baseball. Jack's favorite post game snack is a #7 from McDonalds- two cheeseburgers, fries and a Coke.
+              `
             },
             {
               name: 'Jackson C',
@@ -144,13 +141,10 @@ console.log(showPledges)
     const updateType = e => {
         setPledgeType(e.target.value)
     }
-    const ref = useRef(null);
 
-    const [selectedPlayer, setSelectedPlayer] = useState('Omaha Warriors')
     const updateData = (e, playerObj) => {
         setData(e.target.value)
         playerObj.totalPledges = e.target.value * playerObj.pledge
-        console.log(playerObj)
     }
 
 
@@ -159,15 +153,12 @@ console.log(showPledges)
         await getDocs(collection(db, "players"))
             .then((querySnapshot) => {
                 const pledges = [];
-                console.log(querySnapshot)
                 const newData = querySnapshot.docs
                     .map((doc) => ({ ...doc.data() }));
-                console.log(newData)
                 for (let player of newData) {
 
                     pledges.push(...player?.pledges)
                 }
-                console.log(pledges)
                 setTotalPledges(pledges)
             })
 
@@ -176,9 +167,6 @@ console.log(showPledges)
     useEffect(() => {
         fetchPost();
     }, [])
-    const getTotalPledged = (pledge) => {
-        // playerObj.totalPledges = e.target.value *playerObj.pledge
-    }
 
     return <main id="main">
         <div className="breadcrumbs" data-aos="fade-in" style={{ background: '#E10203' }}>
@@ -227,7 +215,7 @@ console.log(showPledges)
                                         <td>{player.name}</td>
                                         <td>{player.phone}</td>
                                         <td>{player.pledge}{player.pledgeType}</td>
-                                        <td><input type="number" name="noOfHitsFeet" onChange={(e) => updateData(e, player)} style={{ width: '100px' }} /></td>
+                                        <td>{(player.pledgeType =="/foot" || player.pledgeType =="/hit") && <input type="number" name="noOfHitsFeet" onChange={(e) => updateData(e, player)} style={{ width: '100px' }} />}</td>
                                         <td>{player?.pledgeType === ' ' ? player?.pledge : player?.totalPledges}</td>
                                         <td>{player?.venmo}</td>
                                     </tr>
@@ -266,7 +254,22 @@ console.log(showPledges)
 
             </div>
         </section>
+        <footer>
+        <div className="container d-md-flex py-4">
 
+          <div className="me-md-auto text-center text-md-start">
+            <div className="copyright">
+              &copy; Copyright <strong><span>Omaha Warriors</span></strong>. All Rights Reserved | Site created by <a href="http://www.terrataylor.com" target="_blank" rel="noreferrer">TechPangolinLLC</a>
+            </div>
+            <div className='text-end'>
+           
+            </div>
+          </div>
+          <div className="social-links text-center text-md-right pt-3 pt-md-0"> 
+          <Link to="/pledges">View Pledges (Admins Only)</Link>
+          </div>
+        </div>
+      </footer>
 
     </main>
 }

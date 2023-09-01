@@ -7,9 +7,9 @@ import Pledges from './Pledges'
 
 const RoutesComponent = () => {
     return (
-        <Router basename='/OmahaWarriors'>
+        // <Router basename='/OmahaWarriors'>
+        <Router>
             <Routes>
-                {/* <Route path={ROUTES.INTRO_ROUTE} element={<Intro />} /> */}
                 <Route path={ROUTES.MAINPAGE_ROUTE} element={<Home />} />
                 <Route path={ROUTES.PLAYER_ROUTE} element={<Player />} />
                 <Route path={ROUTES.PLEDGES} element={<Pledges />} />

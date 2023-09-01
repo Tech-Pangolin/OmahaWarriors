@@ -1,12 +1,14 @@
 import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { db } from './firebase';
-import { collection, addDoc, getDocs, runTransaction, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { Link } from 'react-router-dom';
+import { collection,  getDocs,  doc, getDoc,  updateDoc } from "firebase/firestore";
 function Player() {
   const { num } = useParams();
   const [player, setPlayer] = useState('')
   const [data, setData] = useState({})
   const [pledgeType, setPledgeType] = useState(null)
+  const [error, setError]= useState('')
   const updateType = e => {
     setPledgeType(e.target.value)
     setIsSuccess(false)
@@ -15,7 +17,6 @@ function Player() {
   const ref = useRef(null);
   const [isSuccess, setIsSuccess] = useState(null)
   const [isError, setIsError] = useState(null)
-  const [selectedPlayer, setSelectedPlayer] = useState('Omaha Warriors')
   const updateData = e => {
     setData({
       ...data,
@@ -26,16 +27,16 @@ function Player() {
   }
 
   function isValid(data) {
-    const emailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    const textValid = /<([A-Za-z_{}()@/]+(\s|=)*)+>(.*<[A-Za-z/>]+)*/gi
     const phoneValid = /^\d{3}-\d{3}-\d{4}$/
     const pledge = Number(data?.pledge)
-
-    console.log(data)
-    console.log(emailValid.test(data.email) && phoneValid.test(data.phone) && !isNaN(pledge))
-    if (emailValid.test(data.email) && phoneValid.test(data.phone) && !isNaN(pledge)) {
-      return true
+   if(!phoneValid.test(data.phone)){
+      setError('Please enter a valid phone number')
+    } else if (isNaN(pledge)){
+      setError('Please enter a valid amount for your pledge')
+    } else{
+      return true;
     }
-
     return false
   }
   const [rawPhoneNumber, setRawPhoneNumber] = useState('');
@@ -57,7 +58,6 @@ function Player() {
     const areaCode = value?.slice(0, 3)
     const firstNum = value?.slice(3, 6)
     const secondNum = value?.slice(6)
-    console.log(areaCode, firstNum, secondNum)
     if (areaCode.length === 3 && firstNum.length === 3 && secondNum.length === 4) {
       value = value?.slice(0, 3) + '-' + value?.slice(3, 6) + '-' + value?.slice(6);
     }
@@ -65,15 +65,11 @@ function Player() {
   };
   const submitPledge = async (evt) => {
     evt.preventDefault()
-    console.log('submit!')
-    console.log(data)
     if (isValid(data)) {
       //  window.open('https://account.venmo.com/u/OWBPoast')
       try {
-        console.log(player)
         const playerData = await getDoc(doc(db, "players", player.name))
         const playerDataObj = playerData.data()
-        console.log(playerDataObj)
         data.pledgeType = pledgeType
         data.player = player.name
 
@@ -86,7 +82,6 @@ function Player() {
         setIsSuccess(true)
         setIsError(false)
       } catch (e) {
-        console.log(e)
         setIsSuccess(false)
         setIsError(true)
       }
@@ -94,27 +89,15 @@ function Player() {
       setIsSuccess(false)
       setIsError(true)
     }
-    // try {
-    //           const docRef = await addDoc(collection(db, "todos"), {
-    //             todo: todo,    
-    //           });
-    //           console.log("Document written with ID: ", docRef.id);
-    //         } catch (e) {
-    //           console.error("Error adding document: ", e);
-    //         }
   }
 
   const fetchPost = async () => {
 
     await getDocs(collection(db, "players"))
       .then((querySnapshot) => {
-        console.log(querySnapshot)
         const newData = querySnapshot.docs
           .map((doc) => ({ ...doc.data(), id: doc.id }));
-        console.log(newData)
-        console.log(num)
         const playerInfo = newData.find(item => item.number == num)
-        console.log(playerInfo)
         setPlayer(playerInfo);
 
       })
@@ -122,6 +105,7 @@ function Player() {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     fetchPost();
   }, [])
 
@@ -164,9 +148,7 @@ function Player() {
     </section>
     <section id="counts" className="counts section-bg">
       <div className="container">
-
         <div className="row counters">
-
           <div className="col-lg-4 col-6 text-center">
             <span data-purecounter-start="0" data-purecounter-end="1232" data-purecounter-duration="1" className="purecounter">{player?.pledges?.filter(pledge => pledge.pledgeType === "/foot").length}</span>
             <p>Total Pledges Per Foot</p>
@@ -201,18 +183,18 @@ function Player() {
             <form onSubmit={submitPledge} role="form" className="php-email-form" >
               <div className="row">
                 <div className="col-md-6 form-group">
-                  <input type="text" name="name" className="form-control" id="name" placeholder="Name" title="Please enter a name" required onChange={updateData} />
+                  <input type="text" name="name" className="form-control" id="name" placeholder="Name" title="Please enter a name" maxLength="55" required onChange={updateData} />
                 </div>
                 <div className="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="text" className="form-control" name="venmo" id="venmo" title="Please enter your Venmo username" placeholder="Venmo Username" required onChange={updateData} />
-                  <div class="form-text" id="basic-addon4">* Leave this blank if you don't use venmo and we'll send an invoice.</div>
-
+                  <input type="text" className="form-control" name="venmo" id="venmo" title="Please enter your Venmo username" maxLength="30" placeholder="Venmo Username" onChange={updateData} />
+                  <div class="form-text" id="basic-addon4"><input className="form-check-input" type="checkbox" value="" id="defaultCheck1" style={{height:'1em'}} /> Check this box if you don't use venmo and we'll send an invoice.</div>
+                 
                  
                 </div>
               </div>
               <div className="row">
                 <div className="col-md-6 form-group">
-                  <input type="email" name="email" className="form-control" id="email" placeholder="Email" required onChange={updateData} />
+                  <input type="email" name="email" className="form-control" id="email" placeholder="Email" maxLength="50" required onChange={updateData} />
                 </div>
                 <div className="col-md-6 form-group mt-3 mt-md-0">
                   <input className="form-control"
@@ -221,8 +203,7 @@ function Player() {
                     onChange={formatPhoneNumber}
                     placeholder="Enter Phone Number"
                   />
-                  {/* <input type="phone" className="form-control" name="phone" id="phone" placeholder="Phone Number" required onChange={updateData} /> */}
-                </div>
+                 </div>
               </div>
               <select class="form-select" name="pledgeType" aria-label="Default select example" onChange={updateType} required>
                 <option selected={null}>Choose Pledge Type</option>
@@ -232,7 +213,7 @@ function Player() {
               </select>
               <div className="input-group mt-3 d-flex justify-content-center" style={{ width: '500px', margin: '0 auto' }}>
                 <span className="input-group-text">Amount to Pledge: $</span>
-                <input type="number" className="form-control" name="pledge" aria-label="Amount (to the nearest dollar)" onChange={updateData} required disabled={pledgeType === null} />
+                <input type="number" className="form-control" name="pledge" step="any" aria-label="Amount (to the nearest dollar)" onChange={updateData} required disabled={pledgeType === null} />
                 <span className="input-group-text">{pledgeType}</span>
               </div>
 
@@ -248,7 +229,7 @@ function Player() {
             </div>
             }
             {isError && <div class="alert alert-danger  mt-5" role="alert">
-              There is a problem with your form submission.  Please verify your values above.
+              There is a problem with your form submission: {error}
             </div>}
           </div>
 
@@ -256,6 +237,20 @@ function Player() {
 
       </div>
     </section>
+    <footer>
+        <div className="container d-md-flex py-4">
+
+          <div className="me-md-auto text-center text-md-start">
+            <div className="copyright">
+              &copy; Copyright <strong><span>Omaha Warriors</span></strong>. All Rights Reserved | Site created by <a href="http://www.terrataylor.com" target="_blank" rel="noreferrer">TechPangolinLLC</a>
+            </div>
+            <div className='text-end'>
+           
+            </div>
+          </div>
+        
+        </div>
+      </footer>
   </main>
 }
 
