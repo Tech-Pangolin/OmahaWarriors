@@ -4,6 +4,7 @@ import { collection, getDocs, doc, setDoc  } from "firebase/firestore";
 import { getAuth, signInWithEmailAndPassword,  } from 'firebase/auth'
 import { Link } from 'react-router-dom';
 import logo from './logo.jpg'
+import carter from './players/carter.jpg'
 import easton from './players/easton.jpg'
 import emerson from './players/emerson.jpg'
 import jack from './players/jack.jpg'
@@ -11,6 +12,7 @@ import jackson from './players/jackson.jpg'
 import mason from './players/mason.jpg'
 import michael from './players/michael.jpg'
 import parker from './players/parker.jpg'
+import rex from './players/rex.jpg'
 import vincent from './players/vincent.jpg'
 
 function Pledges() {
@@ -45,7 +47,7 @@ function Pledges() {
             {
               name: 'Carter A',
               number: 8, 
-              photo: logo
+              photo: carter
             },
             {
               name: 'Easton P',
@@ -111,7 +113,7 @@ function Pledges() {
             {
               name: 'Rex R',
               number: 9, 
-              photo: logo
+              photo: rex
             },
             {
               name: 'Vincent C',
@@ -125,13 +127,14 @@ function Pledges() {
 
         for (let player of team) {
           try {
-            await setDoc(doc(db, "players", player.name), {
-              name: player.name,
-              number: player.number,
-              photo:player?.photo ?? logo,
-              bio: player?.bio ?? '',
-              pledges: []
-            });
+            console.log(player)
+            // await setDoc(doc(db, "players", player.name), {
+            //   name: player.name,
+            //   number: player.number,
+            //   photo:player?.photo ?? logo,
+            //   bio: player?.bio ?? '',
+            //   pledges: []
+            // });
           } catch (e) {
             console.log(e)
           }
