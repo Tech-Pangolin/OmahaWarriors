@@ -203,9 +203,9 @@ function Pledges() {
                                     <th scope="col">Player</th>
                                     <th scope="col">Pledged Name</th>
                                     <th scope="col">Phone Number</th>
+                                    <th scope="col">Email</th>
                                     <th scope="col">Pledge Type</th>
                                     <th scope="col">No of Hits/Feet</th>
-
                                     <th scope="col">Total Pledged</th>
                                     <th scope="col">Venmo</th>
 
@@ -217,6 +217,7 @@ function Pledges() {
                                         <th scope="row">{player.player}</th>
                                         <td>{player.name}</td>
                                         <td>{player.phone}</td>
+                                        <td>{player.email}</td>
                                         <td>{player.pledge}{player.pledgeType}</td>
                                         <td>{(player.pledgeType =="/foot" || player.pledgeType =="/hit") && <input type="number" name="noOfHitsFeet" onChange={(e) => updateData(e, player)} style={{ width: '100px' }} />}</td>
                                         <td>{player?.pledgeType === ' ' ? player?.pledge : player?.totalPledges}</td>
