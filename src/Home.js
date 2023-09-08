@@ -36,31 +36,31 @@ function Home() {
           <div className='row'>
             <div className="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 content text-center mb-5">
               <h3>We're holding a Hitathon to help raise money for our team.  This will help offset costs related to player and organizational fees, uniforms, and tournaments.  Every little bit helps!</h3>
-              <p class="fst-italic">
+              <p className="fst-italic">
                 The Hitathon will be a fun way for the team to fundraise and show off their skills!
                 We will hold the event on Sunday, September 17th from 12pm to 5pm at the baseball field in Elmwood Park.  We will also have a picnic where plates of food can be purchased - those funds will also go to the team. Once all players have completed their hits, there will be a pickup baseball game. Please feel free to come out and join us!
 
               </p>
-              <p class="fst-italic">
+              <p className="fst-italic">
                 Each player will have 10 balls to hit like normal batting practice.  Their top two distances will be recorded and added together, along with how many total balls they hit of the 10 pitched to them.
               </p>
-              <p class="fst-italic">
+              <p className="fst-italic">
                 A pledge can be made in three different ways:
 
               </p>
               <div className='text-start ml-5 d-flex flex-column align-items-center'>
               <ul style={{listStyle:'none', marginLeft:'10%'}}>
-                <li><i class="bi bi-check-circle"></i> per ball hit, for up to 10 hits. <span className="fst-italic">(example: you pledge $1 per ball hit and the player hits 7, you would pay $7)</span></li>
-                <li><i class="bi bi-check-circle"></i> per foot hit adding together their two longest distances hit. <span className="fst-italic">(example: you pledge $0.10 per foot and the player hits a total of 200 feet, you would pay $20)</span></li>
-                <li><i class="bi bi-check-circle"></i> a flat amount.</li>
+                <li><i className="bi bi-check-circle"></i> per ball hit, for up to 10 hits. <span className="fst-italic">(example: you pledge $1 per ball hit and the player hits 7, you would pay $7)</span></li>
+                <li><i className="bi bi-check-circle"></i> per foot hit adding together their two longest distances hit. <span className="fst-italic">(example: you pledge $0.10 per foot and the player hits a total of 200 feet, you would pay $20)</span></li>
+                <li><i className="bi bi-check-circle"></i> a flat amount.</li>
               </ul></div>
-              <p class="fst-italic">
+              <p className="fst-italic">
               Once the event is over, we'll send you an invoice for payment via your Venmo account, email, or text. 
               </p>
-              <p class="fst-italic">
+              <p className="fst-italic">
               Please use the links below to make a pledge for your player of choice!
               </p>
-              <p class="fst-italic">
+              <p className="fst-italic">
               Thank you for supporting our team!  We look forward to seeing you at the picnic or one of our baseball games in the spring!
               </p>
             </div>

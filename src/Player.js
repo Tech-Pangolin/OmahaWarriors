@@ -4,6 +4,7 @@ import { db } from './firebase';
 import { Link } from 'react-router-dom';
 import { collection,  getDocs,  doc, getDoc,  updateDoc } from "firebase/firestore";
 function Player() {
+  const allPledgesRef = doc(db, "pledges","all")
   const { num } = useParams();
   const [player, setPlayer] = useState('')
   const [data, setData] = useState({})
@@ -69,19 +70,25 @@ function Player() {
       //  window.open('https://account.venmo.com/u/OWBPoast')
       try {
         const playerData = await getDoc(doc(db, "players", player.name))
+        const pledgeData = await getDoc(allPledgesRef)
         const playerDataObj = playerData.data()
+        const pledgeDataArr = pledgeData.data()
         data.pledgeType = pledgeType
         data.player = player.name
+        data.id = `${player.name}${Math.floor(Math.random()*9999999)}`
 
         if (playerDataObj) {
-          playerDataObj.pledges.push(data)
-          await updateDoc(doc(db, "players", player.name), playerDataObj);
+          playerDataObj.pledges.push(data)            
+          pledgeDataArr?.totalPledges?.push(data)
+         await updateDoc(doc(db, "players", player.name), playerDataObj);
+         await updateDoc(allPledgesRef, {totalPledges:pledgeDataArr?.totalPledges});
           setPlayer(playerDataObj)
         }
 
         setIsSuccess(true)
         setIsError(false)
       } catch (e) {
+        console.log(e)
         setIsSuccess(false)
         setIsError(true)
       }
@@ -187,7 +194,7 @@ function Player() {
                 </div>
                 <div className="col-md-6 form-group mt-3 mt-md-0">
                   <input type="text" className="form-control" name="venmo" id="venmo" title="Please enter your Venmo username" maxLength="30" placeholder="Venmo Username" onChange={updateData} />
-                  <div class="form-text" id="basic-addon4"><input className="form-check-input" type="checkbox" value="" id="defaultCheck1" style={{height:'1em'}} /> Check this box if you don't use venmo and we'll send an invoice.</div>
+                  <div className="form-text" id="basic-addon4"><input className="form-check-input" type="checkbox" value="" id="defaultCheck1" style={{height:'1em'}} /> Check this box if you don't use venmo and we'll send an invoice.</div>
                  
                  
                 </div>
@@ -205,7 +212,7 @@ function Player() {
                   />
                  </div>
               </div>
-              <select class="form-select" name="pledgeType" aria-label="Default select example" onChange={updateType} required>
+              <select className="form-select" name="pledgeType" aria-label="Default select example" onChange={updateType} required>
                 <option selected={null}>Choose Pledge Type</option>
                 <option value="/hit">Per Hit</option>
                 <option value="/foot">Per Foot</option>
@@ -224,11 +231,11 @@ function Player() {
               </div>
               <div className="text-center"><button type="submit" disabled={isSuccess}>{isSuccess ? 'Thank you for your pledge':'PLEDGE!'}</button></div>
             </form>
-            {isSuccess && <div class="alert alert-success mt-5" role="alert">
+            {isSuccess && <div className="alert alert-success mt-5" role="alert">
               Pledge Successfully Submitted
             </div>
             }
-            {isError && <div class="alert alert-danger  mt-5" role="alert">
+            {isError && <div className="alert alert-danger  mt-5" role="alert">
               There is a problem with your form submission: {error}
             </div>}
           </div>
